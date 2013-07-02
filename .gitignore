@@ -7,6 +7,11 @@ lib-cov
 *.pid
 *.gz
 
+.c9revisions
+.c9search
+
+node_modules
+
 pids
 logs
 results
