@@ -27,24 +27,29 @@ exports.apiRoutes = [
  * Routes that should serve files
  */
 exports.fileRoutes = [
-    { 
-        route: "/",
-        path: "/app-answer.html"
-    },
+{ 
+    route: "/",
+    path: "/app-answer.html"
+},
 
-    { 
-        route: "/answers",
-        path: "/app-answer.html"
-    },
+{ 
+    route: "/projector",
+    path: "/projector/app.html"
+},
 
-    { 
-        route: "/questions",
-        path: "/app-question.html"
-    },
-    
-    { 
-        route: "/test"
-    }    
+{ 
+    route: "/answers",
+    path: "/app-answer.html"
+},
+
+{ 
+    route: "/questions",
+    path: "/app-question.html"
+},
+
+{ 
+    route: "/test"
+}    
 ];
 
 
