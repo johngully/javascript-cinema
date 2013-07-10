@@ -16,11 +16,14 @@ exports.apiRoutes = [
         service: "questionService"
     },
     {
-        route: "/populate/questions",
+        service: "theaterService"
+    },
+    {
+        route: "/data/populate",
         verb: "get",
-        service: "questionService",
+        service: "seedDataService",
         method: "populate"
-    } 
+    },
 ];
 
 /**

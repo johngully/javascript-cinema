@@ -11,7 +11,9 @@ console.log("Database connection established")
 var express = require("express");
 var app = express();
 var routesFactory = require("./common/routesFactory");
+console.log("route factory included");
 routesFactory.create(config, app, db);
+console.log("route factory created");
 app.use(express.static("client")); // Use express to configure the server to servce static file from the "client" directory
 console.log("Routes created");
 

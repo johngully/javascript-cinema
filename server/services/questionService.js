@@ -14,14 +14,4 @@ QuestionService.init = function (db, io) {
     base_init(QuestionService.serviceName, db, io);
 };
 
-/**
- * Populates the questions collection with seed data
- */
-QuestionService.populate = function (request, response) {
-    var data = require("../data/seedData");
-    QuestionService.save({ body: data.question1 }, response);
-    QuestionService.save({ body: data.question2 }, response);
-    QuestionService.save({ body: data.question3 }, response);
-};
-
 exports.service = QuestionService;
