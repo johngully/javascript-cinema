@@ -1,27 +1,26 @@
 define(["root",
-        "features/question/questionController",
-        "common/busyInterceptor"], 
-function (root) {
-    return root.config(function ($routeProvider, $httpProvider) {
-    //return root.config(function ($routeProvider) {
+        "common/routes",
+        "common/busyInterceptor",
+        "features/question/questionController"], 
+function (root, routes) {
+    
+    /**
+     * Add configured routes to the route provider 
+     */
+    function processRouteConfig (routeConfig, routeProvider) {
+        if(!routeConfig) {
+            throw new Error("No routes have been configured for the application.");
+        }
         
-        // Add the busy indicator to the $httpProvider
+        angular.forEach(routeConfig, function(value, key) {
+            routeProvider.when(key, value);
+        });
+    }
+
+    // Add the busy interceptor and configure the routes
+    var config = root.config(function ($routeProvider, $httpProvider) {
         $httpProvider.responseInterceptors.push("busyInterceptor");
-        
-        var config = $routeProvider
-            .when('/', {
-                controller : 'questionController',
-                templateUrl : '/projector/features/question/questionView.html',
-            })
-            .when('/question', {
-                controller : 'questionController',
-                templateUrl : '/projector/features/question/questionView.html',
-            })
-            .otherwise({
-                controller : 'questionController',
-                templateUrl : '/projector/features/question/questionView.html',
-            });
-                
-        return config;
+        processRouteConfig(routes, $routeProvider);
     }); // end config
+    
 }); // end require
