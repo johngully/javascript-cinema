@@ -29,7 +29,7 @@ exports.apiRoutes = [
 exports.fileRoutes = [
 { 
     route: "/",
-    path: "/app-answer.html"
+    path: "/player/app.html"
 },
 
 { 
@@ -38,18 +38,10 @@ exports.fileRoutes = [
 },
 
 { 
-    route: "/answers",
-    path: "/app-answer.html"
+    route: "/player",
+    path: "/player/app.html"
 },
 
-{ 
-    route: "/questions",
-    path: "/app-question.html"
-},
-
-{ 
-    route: "/test"
-}    
 ];
 
 
