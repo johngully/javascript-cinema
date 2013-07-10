@@ -76,7 +76,7 @@ var theaters = {
     theater2: {
         name: "16",
         currentFilm: "Lincoln",
-        currentQuestion: {},
+        currentQuestion: questions.question3,
         game: games.game2,
         _id: 2
     }

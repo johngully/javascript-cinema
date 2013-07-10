@@ -1,7 +1,7 @@
 define(["root",
         "common/routes",
         "common/busyInterceptor",
-        "features/question/questionController"], 
+        "features/theater/theaterController"], 
 function (root, routes) {
     
     /**
