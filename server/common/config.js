@@ -33,8 +33,8 @@ exports.fileRoutes = [
 },
 
 { 
-    route: "/projector",
-    path: "/projector/app.html"
+    route: "/theater",
+    path: "/theater/app.html"
 },
 
 { 
