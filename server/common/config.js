@@ -12,12 +12,9 @@ exports.settings = {
  * Routes that serve api data
  */
 exports.apiRoutes = [
-    {
-        service: "questionService"
-    },
-    {
-        service: "theaterService"
-    },
+    { service: "questionService" },
+    { service: "gameService" },
+    { service: "theaterService" },
     {
         route: "/data/populate",
         verb: "get",

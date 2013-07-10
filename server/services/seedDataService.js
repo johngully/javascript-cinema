@@ -53,12 +53,19 @@ var populate = function (request, response) {
     save({ body: data.questions.question3 }, response);
     console.log("Questions saved");
 
+    setCollection("games");
+    save({ body: data.games.game1 }, response);
+    save({ body: data.games.game2 }, response);
+    save({ body: data.games.game3 }, response);
+    console.log("Games saved");
+    
     // Theaters
     setCollection("theaters");
     save({ body: data.theaters.theater1 }, response);
     save({ body: data.theaters.theater2 }, response);
     console.log("Theaters saved");
-    
+
+
     // TODO: Add more seed data here ...
 
     response.send("Seed data populated");

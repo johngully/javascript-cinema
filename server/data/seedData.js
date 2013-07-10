@@ -33,19 +33,55 @@ var questions = {
     }
 };
 
+/** Game seed data */
+var games = {
+    game1: {
+        theater: 1,
+        questions: [
+            questions.question3,
+            questions.question2,
+            questions.question1
+        ],
+        _id: 1
+    },
+    game2: {
+        theater: 2,
+        questions: [
+            questions.question2,
+            questions.question1,
+            questions.question3
+        ],
+        _id: 2
+    },
+    game3: {
+        theater: 1,
+        questions: [
+            questions.question2,
+            questions.question1,
+            questions.question3
+        ],
+        _id: 2
+    }
+}
+
 /** Theater seed data */
 var theaters = {
     theater1: {
+        name: "12 3D",
         currentFilm: "Life of Pi",
         currentQuestion: questions.question2,
+        game: games.game3,
         _id: 1
     },
     theater2: {
+        name: "16",
         currentFilm: "Lincoln",
         currentQuestion: {},
+        game: games.game2,
         _id: 2
     }
 };
 
 exports.questions = questions;
+exports.games = games;
 exports.theaters = theaters;
