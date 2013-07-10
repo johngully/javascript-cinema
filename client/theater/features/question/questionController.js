@@ -1,39 +1,22 @@
-define(["root", "services/questionsService"], function (root) {
-    return root.controller("questionController", function ($log, $scope, questionsService) {
+define(["root", "services/theaterService"], function (root) {
+    return root.controller("questionController", function ($log, $scope, theaterService) {
         // The cache of available questions
-        var _questions = [];
+        var _theater = {};
+        var _theaterId = 0;
 
         // Load the questions
-        function loadQuestions () {
-            questionsService.query(function (questions) {
-                // Add each question to the questions
-                for(var question in questions) {
-                    _questions.push(questions[question]);
-                }
-                // Set the current question
-                setCurrentQuestion();                
-            });
+        function load () {
+            $scope.theater = theaterService.get({id: _theaterId});
         }
-        
-        // Set the question to the next question in the list
-        function setCurrentQuestion () {
-            $scope.question = _questions.shift();
-        }
-        
-        /** The current question */
-        $scope.question;
         
         /**
-         * Loads the question to be displayed
+         * Loads the current game for the theater
          */
         $scope.init = function () {
-            $log.debug("questionController.init()");
-            
-            // Populate the questions cache
-            loadQuestions();
+            // TODO: Get the theater id from the route parameters
+            _theaterId = 1;
+            load(_theaterId);
         };
         
-        $log.debug("questionController - loaded");
-
     }); // end controller
 }); // end require

@@ -1,6 +1,6 @@
 <div ng-init="init()">
-    <h2>{{question.question}}</h2>
+    <h2>{{theater.currentQuestion.question}}</h2>
     <ul>
-        <li ng-repeat="answer in question.answers">{{answer}}</li>
+        <li ng-repeat="answer in theater.currentQuestion.answers">{{answer}}</li>
     </ul>
 </div>
