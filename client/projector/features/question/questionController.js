@@ -5,18 +5,13 @@ define(["root", "services/questionsService"], function (root) {
 
         // Load the questions
         function loadQuestions () {
-            $scope.setIsBusy(true); // TODO: move the busy managment to a global location from all loads
-            questionsService.query(function (success) {
+            questionsService.query(function (questions) {
                 // Add each question to the questions
-                for(var question in success) {
-                    _questions.push(success[question]);
+                for(var question in questions) {
+                    _questions.push(questions[question]);
                 }
                 // Set the current question
                 setCurrentQuestion();                
-                $scope.setIsBusy(false);
-            }, function (error) {
-                $scope.setIsBusy(false);
-                throw new Error("Questions could not be loaded");
             });
         }
         
