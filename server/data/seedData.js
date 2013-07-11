@@ -33,55 +33,168 @@ var questions = {
     }
 };
 
-/** Game seed data */
-var games = {
-    game1: {
-        theater: 1,
-        questions: [
-            questions.question3,
-            questions.question2,
-            questions.question1
-        ],
-        _id: 1
+/** Film seed data */
+var films = {
+    lifeOfPi: {
+        name: "Life of Pi",
+        imageUrl: ""
     },
-    game2: {
-        theater: 2,
-        questions: [
-            questions.question2,
-            questions.question1,
-            questions.question3
-        ],
-        _id: 2
+    lincoln: {
+        name: "Lincoln",
+        imageUrl: ""
     },
-    game3: {
-        theater: 1,
-        questions: [
-            questions.question2,
-            questions.question1,
-            questions.question3
-        ],
-        _id: 2
+    avengers: {
+        name: "The Avengers",
+        imageUrl: ""
+    },
+    leMiserables: {
+        name: "Le Miserables",
+        imageUrl: ""
     }
-}
+    
+};
 
 /** Theater seed data */
 var theaters = {
     theater1: {
-        name: "12 3D",
-        currentFilm: "Life of Pi",
-        currentQuestion: questions.question2,
-        game: games.game3,
+        name: "2 Real3D",
+        showings: [
+            {
+                film: films.avengers,
+                time: Date.now(),
+                questions: [
+                    questions.question3, 
+                    questions.question2, 
+                    questions.question1
+                ],
+            },
+            {
+                film: films.avengers,
+                time: Date.now(),
+                questions: [
+                    questions.question1, 
+                    questions.question2, 
+                    questions.question3
+                ],
+            }
+        ],
         _id: 1
     },
     theater2: {
         name: "16",
-        currentFilm: "Lincoln",
-        currentQuestion: questions.question3,
-        game: games.game2,
+        showings: [
+            {
+                film: films.lincoln,
+                time: Date.now(),
+                questions: [
+                    questions.question1, 
+                    questions.question3, 
+                    questions.question2
+                ],
+            },
+            {
+                film: films.leMiserables,
+                time: Date.now(),
+                questions: [
+                    questions.question2, 
+                    questions.question1, 
+                    questions.question3
+                ],
+            }
+        ],
+        _id: 2
+    },
+    theater3: {
+        name: "20",
+        showings: [
+            {
+                film: films.lifeOfPi,
+                time: Date.now(),
+                questions: [
+                    questions.question1, 
+                    questions.question3, 
+                    questions.question2
+                ],
+            },
+            {
+                film: films.lifeOfPi,
+                time: Date.now(),
+                questions: [
+                    questions.question2, 
+                    questions.question1, 
+                    questions.question3
+                ],
+            }
+        ],
+        _id: 3
+    }
+};
+
+/** Badge seed data */
+var badges = {
+    noobie: {
+        name: "Noobie",
+        description: "Awarded for completing your first",
+        points: 10,
+        allowMultiple: false,
+        _id: 1
+    },
+    rookie: {
+        name: "Rookie",
+        description: "Awarded for completing your game",
+        points: 10,
+        allowMultiple: false,
+        _id: 2
+    },
+    winning: {
+        name: "Winning",
+        description: "Awarded for winning your first question",
+        points: 25,
+        allowMultiple: false,
+        _id: 3
+    },
+    streak: {
+        name: "Streak",
+        description: "Awarded for winning 3 questions in a row",
+        points: 50,
+        allowMultiple: true,
+        _id: 4
+    },
+    buster: {
+        name: "Buster",
+        description: "Awarded for winning to break another players streak",
+        points: 20,
+        allowMultiple: true,
+        _id: 5
+    },
+};
+
+/** Player seed data */
+var players = {
+    player1: {
+        name: "John Gully",
+        memberNumber: "12345",
+        showings: [1],
+        badges: [],
+        points: 0,
+        _id: 1
+    },
+    player2: {
+        name: "Vishal Marocha",
+        memberNumber: "23456",
+        showings: [1,2],
+        badges: [badges.noobie, badges.winning],
+        points: 35,
         _id: 2
     }
 };
 
-exports.questions = questions;
-exports.games = games;
+
+exports.films = films;
 exports.theaters = theaters;
+
+exports.questions = questions;
+exports.badges = badges;
+exports.players = players;
+
+

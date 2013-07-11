@@ -12,8 +12,9 @@ exports.settings = {
  * Routes that serve api data
  */
 exports.apiRoutes = [
+    { service: "badgeService" },
+    { service: "playerService" },
     { service: "questionService" },
-    { service: "gameService" },
     { service: "theaterService" },
     {
         route: "/data/populate",
@@ -27,21 +28,18 @@ exports.apiRoutes = [
  * Routes that should serve files
  */
 exports.fileRoutes = [
-{ 
-    route: "/",
-    path: "/player/app.html"
-},
-
-{ 
-    route: "/theater",
-    path: "/theater/app.html"
-},
-
-{ 
-    route: "/player",
-    path: "/player/app.html"
-},
-
+    { 
+        route: "/",
+        path: "/player/app.html"
+    },
+    { 
+        route: "/player",
+        path: "/player/app.html"
+    },
+    { 
+        route: "/theater",
+        path: "/theater/app.html"
+    }
 ];
 
 

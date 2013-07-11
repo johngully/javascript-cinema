@@ -46,6 +46,14 @@ var save = function (request, response) {
 var populate = function (request, response) {
     var data = require("../data/seedData");
     
+    // Films
+    setCollection("films");
+    save({ body: data.films.lifeOfPi }, response);
+    save({ body: data.films.lincoln }, response);
+    save({ body: data.films.avengers }, response);
+    save({ body: data.films.leMiserables }, response);
+    console.log("Films saved");
+    
     // Questions
     setCollection("questions");
     save({ body: data.questions.question1 }, response);
@@ -53,17 +61,28 @@ var populate = function (request, response) {
     save({ body: data.questions.question3 }, response);
     console.log("Questions saved");
 
-    setCollection("games");
-    save({ body: data.games.game1 }, response);
-    save({ body: data.games.game2 }, response);
-    save({ body: data.games.game3 }, response);
-    console.log("Games saved");
-    
     // Theaters
     setCollection("theaters");
     save({ body: data.theaters.theater1 }, response);
     save({ body: data.theaters.theater2 }, response);
     console.log("Theaters saved");
+
+    // Badges
+    setCollection("badges");
+    save({ body: data.badges.noobie }, response);
+    save({ body: data.badges.rookie }, response);
+    save({ body: data.badges.winning }, response);
+    save({ body: data.badges.streak }, response);
+    save({ body: data.badges.buster }, response);
+    console.log("Badges saved");
+    
+    // Players
+    setCollection("players");
+    save({ body: data.players.player1 }, response);
+    save({ body: data.players.player2 }, response);
+    save({ body: data.players.player3 }, response);
+    console.log("Players saved");
+    
 
 
     // TODO: Add more seed data here ...

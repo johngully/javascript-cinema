@@ -88,4 +88,15 @@ var BaseService = function () {
     };
 };
 
+var createDerivedService = function (serviceName) {
+    var newService = new BaseService();
+    var base_init = newService.init;
+    newService.serviceName = serviceName;
+    newService.init = function (db, io) {
+        base_init(newService.serviceName, db, io);
+    };
+    return newService;
+}
+
 exports.service = BaseService;
+exports.createDerivedService = createDerivedService;
