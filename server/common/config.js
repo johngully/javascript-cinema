@@ -17,6 +17,18 @@ exports.apiRoutes = [
     { service: "questionService" },
     { service: "theaterService" },
     {
+        route: "/theaters/:id/start",
+        verb: "get",
+        service: "gameManagementService",
+        method: "start"
+    },
+    {
+        route: "/theaters/:id/stop",
+        verb: "get",
+        service: "gameManagementService",
+        method: "stop"
+    },
+    {
         route: "/data/populate",
         verb: "get",
         service: "seedDataService",

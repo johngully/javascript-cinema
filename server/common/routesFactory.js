@@ -4,7 +4,7 @@ var apiRoutePrefix;
 /**
  * Create the routes in the apiRoutes & fileRoutes configuration objects
  */
-var create = function (config, express, db) {
+var create = function (config, express, db, io) {
     // Ensure route parameters are valid
     if (!express) {
         throw new Error("The routes factory is designed to create routes using 'express'.  The 'express' parameter was expected to be defined.");
@@ -30,8 +30,8 @@ var create = function (config, express, db) {
     });
 
     // Create the api routes
-    config.apiRoutes.forEach(function(apiRoute){
-        createApiRoute(apiRoute, express, db);
+    config.apiRoutes.forEach(function (apiRoute) {
+        createApiRoute(apiRoute, express, db, io);
     });
 };
 
@@ -49,7 +49,7 @@ function createFileRoute (fileRoute, express) {
 /**
  * Create a route following the api service routing conventions
  */
-function createApiRoute (apiRoute, express, db) {
+function createApiRoute (apiRoute, express, db, io) {
     if (!apiRoute.service) {
         throw new Error("A 'service' is required to be configured");
     }
@@ -68,20 +68,24 @@ function createApiRoute (apiRoute, express, db) {
 
     // Create the route
     var route = apiRoutePrefix + apiRoute.route;
-    var service = serviceFactory.create(apiRoute.service, db);
+    var service = serviceFactory.create(apiRoute.service, db, io);
     var callback = service[apiRoute.method];
-    express[apiRoute.verb](route, callback);   
+    express[apiRoute.verb](route, callback);
 }
 
 /**
  * Generate the default routes for a service (all, find, save, delete)
  */
-function createApiRouteDefaults (apiRoute, express, db) {
+function createApiRouteDefaults (apiRoute, express, db, io) {
+    // NOTE: The logic below creates a service simply to get it's name.
+    //       This seems a little excessive and could probably be refined
+    //       so that the redunant service creation is eliminated.
+    
     if (!apiRoute.service) {
        throw new Error("Api route configuration requires a 'service' to be specified to create default routes."); 
     }
 
-    var service = serviceFactory.create(apiRoute.service, db);
+    var service = serviceFactory.create(apiRoute.service, db, io);
     var route = "/" + service.serviceName;
     var routeWithId = route + '/:id';
 
@@ -91,11 +95,11 @@ function createApiRouteDefaults (apiRoute, express, db) {
     var putRoute = createApiRouteObject(route, "put", apiRoute.service, "save");
     var deleteRoute = createApiRouteObject(routeWithId, "delete", apiRoute.service, "remove");
     
-    createApiRoute(getAllRoute, express, db);
-    createApiRoute(getByIdRoute, express, db);
-    createApiRoute(postRoute, express, db);
-    createApiRoute(putRoute, express, db);
-    createApiRoute(deleteRoute, express, db);
+    createApiRoute(getAllRoute, express, db, io);
+    createApiRoute(getByIdRoute, express, db, io);
+    createApiRoute(postRoute, express, db, io);
+    createApiRoute(putRoute, express, db, io);
+    createApiRoute(deleteRoute, express, db, io);
 }
 
 /**

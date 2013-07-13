@@ -1,6 +1,27 @@
+<style type="text/css">
+    li.answerDisplayed {
+        color: gray;
+    }
+    
+    li.answerCorrect {
+        font-weight: bold;
+        color: green;
+    }
+</style>
 <div ng-init="init()">
-    <h2>{{theater.currentQuestion.question}}</h2>
-    <ul>
-        <li ng-repeat="answer in theater.currentQuestion.answers">{{answer}}</li>
-    </ul>
+    <input type="button" ng-click="start()" value="Start"></input>
+    <input type="button" ng-click="stop()" value="Stop"></input>
+    <h2>{{question.question}}</h2>
+
+    <div>
+        <ul>
+            <li ng-repeat="answer in question.answers" ng-class="{
+                answerDisplayed: isAnswerDisplayed,
+                answerCorrect: answer == $parent.question.answer && isAnswerDisplayed
+                
+            }">
+            <span >{{answer}}</span></li>
+        </ul>        
+    </div>
+
 </div>

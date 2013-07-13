@@ -24,7 +24,7 @@ var questions = {
     },
     question3: {
         question: "This is a test question?",
-        answer: "623 million",
+        answer: "A",
         answers: [
             "A",
             "B"
@@ -58,10 +58,12 @@ var films = {
 var theaters = {
     theater1: {
         name: "2 Real3D",
+        currentShowing: 0,
         showings: [
             {
                 film: films.avengers,
                 time: Date.now(),
+                currentQuestion: 1,
                 questions: [
                     questions.question3, 
                     questions.question2, 
@@ -82,10 +84,12 @@ var theaters = {
     },
     theater2: {
         name: "16",
+        currentShowing: 0,
         showings: [
             {
                 film: films.lincoln,
                 time: Date.now(),
+                currentQuestion: 0,
                 questions: [
                     questions.question1, 
                     questions.question3, 
@@ -106,10 +110,12 @@ var theaters = {
     },
     theater3: {
         name: "20",
+        currentShowing: 1,
         showings: [
             {
                 film: films.lifeOfPi,
                 time: Date.now(),
+                currentQuestion: 1,
                 questions: [
                     questions.question1, 
                     questions.question3, 
