@@ -39,7 +39,6 @@ define(["root", "common/socket", "services/theaterService"], function (root) {
         // Subscribe to the "moveToAnswer" message.  
         // Set the isAnswerDisplayed indicator to "true"
         socket.on("moveToAnswer", function (theater) {
-            $log.debug("moveToQuestion");
             $scope.isAnswerDisplayed = true;
         });
 
@@ -69,7 +68,7 @@ define(["root", "common/socket", "services/theaterService"], function (root) {
         
         
         // TODO: Move to the theater management screen
-        $scope.start = function(){
+        $scope.start = function () {
             theaterService.start.get({id: _theaterId});
         };
         

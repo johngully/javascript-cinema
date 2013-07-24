@@ -50,14 +50,15 @@ var stop = function (request, response) {
         throw new Error("A parameter of 'id' is required to stop a game.");
     }
     unregisterTheater(theaterId);
+    response.send("stopped");
 };
 
 function registerTheater (theater) {
     _theaters[theater._id] = theater;
 }
 
-function unregisterTheater (theater) {
-    _theaters[theater._id] = undefined;
+function unregisterTheater (theaterId) {
+    _theaters[theaterId] = undefined;
 }
 
 function broadcastQuestion (theater) {
@@ -95,7 +96,6 @@ function incrementCurrentQuestion (theater) {
         currentShowing.currentQuestion = 0; // For now just wrap around
     }
     
-    console.log(theater);
     save(theater);
 }
 
