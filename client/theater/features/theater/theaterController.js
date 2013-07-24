@@ -1,8 +1,6 @@
 define(["root", "common/socket", "services/theaterService"], function (root) {
     return root.controller("theaterController", function ($log, $scope, $routeParams, socket, theaterService) {
-        // The cache of available theaters
         var _theaterId = 0;
-        var _showing = {};
         
         /** Indicates whether the question or answer should be displayed */
         $scope.isAnswerDisplayed = false;
@@ -11,7 +9,7 @@ define(["root", "common/socket", "services/theaterService"], function (root) {
         $scope.theater;
         
         /** The current showing */
-        $scope.question = {};
+        $scope.question;
 
         /**
          * Set the current question if the theater changes
@@ -22,39 +20,37 @@ define(["root", "common/socket", "services/theaterService"], function (root) {
                 return;
             }
             
-            _showing = getCurrentShowing($scope.theater);
-            $scope.question = getCurrentQuestion(_showing);
+            var showing = getCurrentShowing($scope.theater);
+            $scope.question = getCurrentQuestion(showing);
         }, true);
-        
-        $scope.start = function(){
-            theaterService.start.get({id: _theaterId});
-        };
-        
-        $scope.stop = function () {
-            theaterService.stop.get({id: _theaterId});
-        };
 
         /**
          * Load the current game for the theater
          */
         $scope.init = function () {
+            if (!$routeParams.id) {
+                throw new Error("An id parameter is required, but was not found.");
+            }
+            
             _theaterId = $routeParams.id;
             load(_theaterId);
         };
         
+        // Subscribe to the "moveToAnswer" message.  
+        // Set the isAnswerDisplayed indicator to "true"
         socket.on("moveToAnswer", function (theater) {
             $log.debug("moveToQuestion");
             $scope.isAnswerDisplayed = true;
         });
 
+        // Subscribe to the "moveToQuestion" message.  
+        // Load the updated theater and set the isAnswerDisplayed indicator to "false". 
         socket.on("moveToQuestion", function (theater) {
-            $log.debug("moveToQuestion");
-            $log.debug(theater);
             $scope.isAnswerDisplayed = false;
             $scope.theater = theater;
         });
 
-        // Load the theaters
+        // Load the theater
         function load () {
             $scope.theater = theaterService.get({id: _theaterId});
         }
@@ -70,5 +66,16 @@ define(["root", "common/socket", "services/theaterService"], function (root) {
             var currentQuestion = (showing.currentQuestion) ? showing.currentQuestion : 0;
             return showing.questions[currentQuestion];
         }
+        
+        
+        // TODO: Move to the theater management screen
+        $scope.start = function(){
+            theaterService.start.get({id: _theaterId});
+        };
+        
+        // TODO: Move to the theater management screen
+        $scope.stop = function () {
+            theaterService.stop.get({id: _theaterId});
+        };
     }); // end controller
 }); // end require
