@@ -8,7 +8,7 @@ var db = databaseFactory.create(config);
 console.log("Database connection established")
 
 // Create the routes
-var io = require('socket.io');
+var socket = require('socket.io');
 var express = require("express");
 var app = express();
 
@@ -16,7 +16,8 @@ var app = express();
 // Bootstrap the web server
 var http = require("http");
 var server = http.createServer(app);
-io = io.listen(server);
+var io = socket.listen(server);
+io.set("log level", config.settings.ioLogLevel);
 server.listen(config.settings.port, config.settings.serverName);
 console.log("Server started");
 console.log("Listening at: " + config.settings.serverName + ":" + config.settings.port);

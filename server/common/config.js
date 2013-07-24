@@ -1,3 +1,11 @@
+/** socket.io log levels */
+var ioLogLevels = {
+    error : 0, 
+    warn : 1, 
+    info : 2, 
+    debug : 3
+}
+
 /**
  * General settings for the node application
  */
@@ -6,6 +14,7 @@ exports.settings = {
     port : process.env.PORT,
     dataPath : "./server/data",
     apiRoutePrefix : "/api",
+    ioLogLevel: ioLogLevels.warn, 
 };
 
 /**
