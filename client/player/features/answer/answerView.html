@@ -1,6 +1,32 @@
 <div ng-init="init()">
-    <h2>{{question.question}}</h2>
-    <ul>
-        <li ng-repeat="answer in question.answers"><input type="checkbox" />{{answer}}</li>
-    </ul>
+    <style type="text/css">
+        li.answerDisplayed {
+            color: gray;
+        }
+        
+        li.answerCorrect {
+            font-weight: bold;
+            color: green;
+        }
+        
+        li.answerIncorrect {
+            color: red;
+        }
+    </style>
+    
+    <div id="question">
+        <form ng-submit="save()">
+            <h2>{{question.question}}</h2>
+            <ul>
+                <li ng-repeat="answer in question.answers" ng-class="{
+                    answerDisplayed: isAnswerDisplayed,
+                    answerCorrect: answer == $parent.question.answer && isAnswerDisplayed,
+                    answerIncorrect: answer != $parent.question.answer && isAnswerDisplayed && answer == selectedAnswer
+                }"><input type="checkbox" ng-click="selectAnswer(answer)" />{{answer}}</li>
+            </ul>
+            
+            <input type="submit" value="send answer" ng-hide="hasAnswerBeenSaved"></input>
+            <div ng-show="hasAnswerBeenSaved">waiting for other players</div>
+        </form>
+</div>
 </div>

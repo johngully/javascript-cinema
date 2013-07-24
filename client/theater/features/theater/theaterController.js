@@ -33,7 +33,7 @@ define(["root", "common/socket", "services/theaterService"], function (root) {
             }
             
             _theaterId = $routeParams.id;
-            load(_theaterId);
+            load();
         };
         
         // Subscribe to the "moveToAnswer" message.  

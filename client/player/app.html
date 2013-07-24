@@ -2,15 +2,16 @@
 
 <html ng-controller="baseController">
 <head>
+    <script src="/socket.io/socket.io.js"></script>
     <title>JavaScript Cinema - Player</title>
 </head>
 <body>
-    <h1>MegaPlex Movie Challenge</h1>
+    <h1>MegaPlex Movie Challenge - Answer</h1>
     <div ng-show="appState.isBusy" style="display:none;">loading ...</div>
     <div>
         <ng-view></ng-view>
     </div>
     
-    <script data-main="app" src="../lib/require.js"></script>
+    <script data-main="/player/app" src="../lib/require.js"></script>
 </body>
 </html>

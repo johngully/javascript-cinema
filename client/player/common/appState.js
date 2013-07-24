@@ -2,7 +2,14 @@ define(["root"], function (root) {
     return root.factory("appState", function ($log) {
         var _isBusyCounter = 0;
         var isBusy = false;
-                
+
+        /**
+         * Handle all application errors
+         */
+        function setError (message) {
+            $log.error(message);
+        }
+    
         /**
          * Set the isBusy flag
          */
@@ -23,9 +30,11 @@ define(["root"], function (root) {
             // If the busy counter is more than 0
             // then the busy state is "busy".
             isBusy = (_isBusyCounter > 0);
+            $log.debug("isBusy: " + isBusy);
         };
-    
+        
         return {
+            setError: setError,
             setIsBusy: setIsBusy,
             isBusy: isBusy
         };

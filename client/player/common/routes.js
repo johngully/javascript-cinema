@@ -1,10 +1,10 @@
 define([], function () {
     var routes = {
-        "/": {
+        "/:id": {
             "controller" : "answerController",
             "templateUrl" : "/player/features/answer/answerView.html"
         },
-        "/question": {
+        "/player/:id": {
             "controller" : "answerController",
             "templateUrl" : "/player/features/answer/answerView.html"
         },
