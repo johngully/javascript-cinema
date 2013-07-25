@@ -65,16 +65,5 @@ define(["root", "common/socket", "services/theaterService"], function (root) {
             var currentQuestion = (showing.currentQuestion) ? showing.currentQuestion : 0;
             return showing.questions[currentQuestion];
         }
-        
-        
-        // TODO: Move to the theater management screen
-        $scope.start = function () {
-            theaterService.start.get({id: _theaterId});
-        };
-        
-        // TODO: Move to the theater management screen
-        $scope.stop = function () {
-            theaterService.stop.get({id: _theaterId});
-        };
     }); // end controller
 }); // end require
