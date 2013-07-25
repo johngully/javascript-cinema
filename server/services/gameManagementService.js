@@ -14,6 +14,24 @@ var init = function (db, io) {
     _collection = _database.collection("theaters");
 };
 
+var toggleStartStop = function (request, response) {
+    var theaterId = request.params.id;
+    
+    // Ensure the theaterId has been provided
+    if (!theaterId) {
+        throw new Error("A parameter of 'id' is required to start a game.");
+    }
+    
+    var isRegistered = isTheaterRegistered(theaterId);
+    
+    if (isRegistered) {
+        stop(request, response); 
+    }
+    else {
+        start(request, response);
+    }
+};
+
 /**
  * Starts a game for the specified theater
  */
@@ -35,7 +53,7 @@ var start = function (request, response) {
         
         registerTheater(theater);
         broadcastQuestion(theater);
-        response.send("started");
+        response.send({gameState: "started"});
     });
 };
 
@@ -50,7 +68,7 @@ var stop = function (request, response) {
         throw new Error("A parameter of 'id' is required to stop a game.");
     }
     unregisterTheater(theaterId);
-    response.send("stopped");
+    response.send({gameState: "stopped"});
 };
 
 function registerTheater (theater) {
@@ -59,6 +77,10 @@ function registerTheater (theater) {
 
 function unregisterTheater (theaterId) {
     _theaters[theaterId] = undefined;
+}
+
+function isTheaterRegistered (theaterId) {
+    return Boolean(_theaters[theaterId]);
 }
 
 function broadcastQuestion (theater) {
@@ -117,6 +139,7 @@ function save (theater) {
 
 exports.service = {
     init: init,
+    toggleStartStop: toggleStartStop,
     start: start,
     stop: stop
 };

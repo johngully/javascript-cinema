@@ -1,0 +1,23 @@
+<div ng-init="init()">
+    <table>
+        <thead>
+            <tr>
+                <th>Theater</th>
+                <th>Current</th>
+                <th>Next</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="theater in theaters">
+                <td>{{theater.name}}</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="button" value="Stop" ng-click="toggleStartStop(theater)" ng-show="theater.gameState == 'started'" />
+                    <input type="button" value="Start" ng-click="toggleStartStop(theater)" ng-show="theater.gameState != 'started'"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

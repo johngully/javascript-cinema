@@ -26,6 +26,12 @@ exports.apiRoutes = [
     { service: "questionService" },
     { service: "theaterService" },
     {
+        route: "/theaters/:id/toggle",
+        verb: "get",
+        service: "gameManagementService",
+        method: "toggleStartStop"
+    },
+    {
         route: "/theaters/:id/start",
         verb: "get",
         service: "gameManagementService",
